@@ -1,5 +1,6 @@
 /* Alguns dos comandos utilizados durante o processo de tratamento dos dados estão documentados abaixo. Logo acima dos comandos se encontram seus respectivos comentários explicativos */
 
+
 /*--------------------------------------------------------------------------*/
 
 
