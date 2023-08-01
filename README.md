@@ -1,2 +1,4 @@
-# ProcessDados_Datatran
-Tratamento e carga de dados utilizando somente SQL.
+## Tratamento de dados utilizando somente SQL
+
+As tabelas disponibilizadas na pasta 'tabelas-originais' se tratam de bases de dados relacionadas a acidentes de trânsito terrestre ocorridos entre os anos de 2017 e 2020. Os dados brutos fornecidos por essas tabelas poderiam ser utilizados para análises de dados importantes, porém, analisando as mesmas foi possível concluir que elas possuíam inconsistências e erros de formatação em determinados campos, como o uso de vírgula em dados numéricos o que inviabiliza seu uso. 
+Todos os dados Foram tratados dentro do banco de dados PostgreSQL através da interface pgAdmin 4 utilizando somente consultas SQL. Já na pasta 'tabelas-modificadas-com-sql' se encontram as tabelas atualizadas com os dados corrigidos, permitindo que as mesmas sejam utilizadas para análises posteriores. O arquivo 'comandsSQL.txt' possui algumas das etapas e exemplos dos comandos SQL utilizados.
