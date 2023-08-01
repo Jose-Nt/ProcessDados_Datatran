@@ -55,7 +55,8 @@ CSV HEADER;
 /*--------------------------------------------------------------------------*/
 
 
-/* Exemlo de criação de nova tabela com correção de tipo de dado numérico formatado incorretamente e correção de dado inválido no campo ID que impossibilitava sua classificação como integer */
+/* Exemlo de criação de nova tabela com correção de tipo de dado numérico formatado incorretamente e correção 
+de dado inválido no campo ID que impossibilitava sua classificação como integer */
 
 CREATE TABLE datatrandezesseteat AS
 SELECT
