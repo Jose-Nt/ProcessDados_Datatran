@@ -1,0 +1,118 @@
+/* Alguns dos comandos utilizados durante o processo de tratamento dos dados estão documentados abaixo. Logo acima dos comandos se encontram seus respectivos comentários explicativos */
+
+/*--------------------------------------------------------------------------*/
+
+
+/* Comando de criação de tabela com todos os campos sendo VARCHAR a fim de possibilitar o carregamento da base de dados com formatações incorretas para dentro do postgreSQL, permitindo que sejam feitas alterações nos mesmos utilizando SQL e a interface ppgAdmin 4 */
+
+CREATE TABLE datatrandezessete
+(id VARCHAR,
+data_inversa VARCHAR,
+dia_semana VARCHAR,
+horario VARCHAR,
+uf VARCHAR,
+br VARCHAR,
+km VARCHAR,
+municipio VARCHAR,
+causa_acidente VARCHAR,
+tipo_acidente VARCHAR,
+classificacao_acidente VARCHAR,
+fase_dia VARCHAR,
+sentido_via VARCHAR,
+condicao_metereologica VARCHAR,
+tipo_pista VARCHAR,
+tracado_via VARCHAR,
+uso_solo VARCHAR,
+pessoas VARCHAR,
+mortos VARCHAR,
+feridos_leves VARCHAR,
+feridos_graves VARCHAR,
+ilesos VARCHAR,
+ignorados VARCHAR,
+feridos VARCHAR,
+veiculos VARCHAR,
+latitude VARCHAR,
+longitude VARCHAR,
+regional VARCHAR,
+delegacia VARCHAR,
+uop VARCHAR)
+
+/*--------------------------------------------------------------------------*/
+
+
+/* Comando SQL para possibilitar a consulta da base de dados dentro do PostgreSQL (upload do arquivo .csv para tabela) */
+
+COPY datatrandezessete(id, data_inversa, dia_semana, horario, uf, br, km, municipio, causa_acidente, tipo_acidente, classificacao_acidente, fase_dia, sentido_via, condicao_metereologica, tipo_pista, tracado_via, uso_solo, pessoas, mortos, feridos_leves, feridos_graves, ilesos, ignorados, feridos, veiculos, latitude, longitude, regional, delegacia, uop)
+FROM 'C:\Users\*****\Downloads\estagiothais\praticasql\datatran2017.csv'
+DELIMITER ';'
+CSV HEADER;
+
+
+/*--------------------------------------------------------------------------*/
+
+
+/* Exemlo de criação de nova tabela com correção de tipo de dado numérico formatado incorretamente e correção de dado inválido no campo ID que impossibilitava sua classificação como integer */
+
+CREATE TABLE datatrandezesseteat AS
+SELECT
+CAST(REPLACE((CASEWHEN km = 'NA' THEN null ELSE km END), ',', '.' ) as numeric) AS km
+CAST(REPLACE((CASEWHEN latitude = 'NA' THEN null ELSE latitude END), ',', '.' ) as numeric) AS latitude
+CAST(REPLACE((CASEWHEN longitude = 'NA' THEN null ELSE longitude END), ',', '.' ) as numeric) AS longitude
+CAST(REPLACE((CASEWHEN id = 'NA' THEN null ELSE id END), '1,00E+05', '' ) as numeric) AS id
+FROM datatrandezessete
+
+
+/*--------------------------------------------------------------------------*/
+
+
+/* Comando SQL para criação de tabela final com os tipos de dados atualizados, já extraindo dados da tabela anteriormente criada a qual contém as correções necessárias para sua utilização em análises posteriores */
+
+CREATE TABLE datatran2017 AS
+SELECT
+CAST (id AS INTEGER) AS id,
+CAST (data_inversa AS DATE) AS data_inversa,
+CAST (dia_semana AS VARCHAR) AS dia_semana,
+CAST (horario AS TIME WITH TIME ZONE) AS horario,
+CAST (uf AS VARCHAR) AS uf,
+CAST (br AS INTEGER) AS br,
+CAST (km AS NUMERIC) AS km,
+CAST (municipio AS VARCHAR) AS municipio,
+CAST (causa_acidente AS VARCHAR) AS causa_acidente,
+CAST (tipo_acidente AS VARCHAR) AS tipo_acidente,
+CAST (classificacao_acidente AS VARCHAR) AS classificacao_acidente,
+CAST (fase_dia AS VARCHAR) AS fase_dia,
+CAST (sentido_via AS VARCHAR) AS sentido_via,
+CAST (condicao_metereologica AS VARCHAR) AS condicao_metereologica,
+CAST (tipo_pista AS VARCHAR) AS tipo_pista,
+CAST (tracado_via AS VARCHAR) AS tracado_via,
+CAST (uso_solo AS VARCHAR) AS uso_solo,
+CAST (pessoas AS INTEGER) AS pessoas,
+CAST (mortos AS INTEGER) AS mortos,
+CAST (feridos_leves AS INTEGER) AS feridos_leves,
+CAST (feridos_graves AS INTEGER) AS feridos_graves,
+CAST (ilesos AS INTEGER) AS ilesos,
+CAST (ignorados AS INTEGER) AS ignorados,
+CAST (feridos AS INTEGER) AS feridos,
+CAST (veiculos AS INTEGER) AS veiculos,
+CAST (latitude AS NUMERIC) AS latitude,
+CAST (longitude AS NUMERIC) AS longitude,
+CAST (regional AS VARCHAR) AS regional,
+CAST (delegacia AS VARCHAR) AS delegacia,
+CAST (uop AS VARCHAR) AS uop
+FROM datatrandezesseteat
+
+
+/*--------------------------------------------------------------------------*/
+
+
+/* Comando SQL pra exportar a tabela atualizada e pronta para uso para novo arquivo .csv a fim de compartilha-lo */
+
+copy
+(SELECT * 
+FROM datatran.datatran2017)
+to 'C:\Users\*****\Downloads\Datatran\datatran2017.csv'
+with delimiter ';'
+csv header
+
+
+/*--------------------------------------------------------------------------*/
