@@ -1,10 +1,13 @@
-/* Alguns dos comandos utilizados durante o processo de tratamento dos dados estão documentados abaixo. Logo acima dos comandos se encontram seus respectivos comentários explicativos */
+/* Alguns dos comandos utilizados durante o processo de tratamento dos dados estão documentados abaixo. 
+Logo acima dos comandos se encontram seus respectivos comentários explicativos */
 
 
 /*--------------------------------------------------------------------------*/
 
 
-/* Comando de criação de tabela com todos os campos sendo VARCHAR a fim de possibilitar o carregamento da base de dados com formatações incorretas para dentro do postgreSQL, permitindo que sejam feitas alterações nos mesmos utilizando SQL e a interface ppgAdmin 4 */
+/* Comando de criação de tabela com todos os campos sendo VARCHAR a fim de possibilitar o carregamento da base de 
+dados com formatações incorretas para dentro do postgreSQL, permitindo que sejam feitas alterações nos mesmos 
+utilizando SQL e a interface ppgAdmin 4 */
 
 CREATE TABLE datatrandezessete
 (id VARCHAR,
@@ -66,7 +69,8 @@ FROM datatrandezessete
 /*--------------------------------------------------------------------------*/
 
 
-/* Comando SQL para criação de tabela final com os tipos de dados atualizados, já extraindo dados da tabela anteriormente criada a qual contém as correções necessárias para sua utilização em análises posteriores */
+/* Comando SQL para criação de tabela final com os tipos de dados atualizados, já extraindo dados da 
+tabela anteriormente criada a qual contém as correções necessárias para sua utilização em análises posteriores */
 
 CREATE TABLE datatran2017 AS
 SELECT
