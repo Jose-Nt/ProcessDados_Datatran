@@ -7,7 +7,7 @@ Logo acima dos comandos se encontram seus respectivos comentários explicativos 
 
 /* Comando de criação de tabela com todos os campos sendo VARCHAR a fim de possibilitar o carregamento da base de 
 dados com formatações incorretas para dentro do postgreSQL, permitindo que sejam feitas alterações nos mesmos 
-utilizando SQL e a interface ppgAdmin 4 */
+utilizando SQL e a interface pgAdmin 4 */
 
 CREATE TABLE datatrandezessete
 (id VARCHAR,
